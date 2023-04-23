@@ -81,12 +81,12 @@ class MediaAttachment < ApplicationRecord
 
   IMAGE_CONVERTED_STYLES = {
     original: {
-      format: 'jpeg',
-      content_type: 'image/jpeg',
+      format: 'avif',
+      content_type: 'image/avif',
     }.merge(IMAGE_STYLES[:original]).freeze,
 
     small: {
-      format: 'jpeg',
+      format: 'avif',
     }.merge(IMAGE_STYLES[:small]).freeze,
   }.freeze
 
