@@ -148,12 +148,11 @@ class MediaAttachment < ApplicationRecord
 
   AUDIO_STYLES = {
     original: {
-      format: 'mp3',
-      content_type: 'audio/mpeg',
+      format: 'opus',
+      content_type: 'audio/opus',
       convert_options: {
         output: {
           'loglevel' => 'fatal',
-          'q:a' => 2,
         }.freeze,
       }.freeze,
     }.freeze,
