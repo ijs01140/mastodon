@@ -87,6 +87,7 @@ class MediaAttachment < ApplicationRecord
 
     small: {
       format: 'avif',
+      content_type: 'image/avif',
     }.merge(IMAGE_STYLES[:small]).freeze,
   }.freeze
 
