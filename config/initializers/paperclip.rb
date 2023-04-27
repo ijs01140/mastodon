@@ -4,11 +4,7 @@ Paperclip::DataUriAdapter.register
 Paperclip::ResponseWithLimitAdapter.register
 
 Paperclip.interpolates :filename do |attachment, style|
-  if style == :original
-    attachment.original_filename
-  else
-    [basename(attachment, style), extension(attachment, style)].delete_if(&:blank?).join('.')
-  end
+  [basename(attachment, style), extension(attachment, style)].delete_if(&:blank?).join('.')
 end
 
 Paperclip.interpolates :prefix_path do |attachment, style|
