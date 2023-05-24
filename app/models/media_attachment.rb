@@ -144,7 +144,7 @@ class MediaAttachment < ApplicationRecord
       blurhash: BLURHASH_OPTIONS,
     }.freeze,
 
-    original: VIDEO_FORMAT.merge(passthrough_options: VIDEO_PASSTHROUGH_OPTIONS).freeze,
+    original: VIDEO_FORMAT.freeze,
   }.freeze
 
   AUDIO_STYLES = {
