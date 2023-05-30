@@ -102,6 +102,7 @@ class MediaAttachment < ApplicationRecord
         'vf' => 'scale=\'trunc(iw/2)*2:trunc(ih/2)*2\'',
         'vsync' => 'cfr',
         'c:v' => 'libsvtav1',
+        'c:a' => 'libopus',
         'frames:v' => 60 * 60 * 3,
         'crf' => 35,
         'preset' => 10,
