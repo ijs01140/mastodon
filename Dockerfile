@@ -2,6 +2,7 @@
 # This needs to be bullseye-slim because the Ruby image is built on bullseye-slim
 ARG NODE_VERSION="16.18.1-bullseye-slim"
 
+FROM ijs01140/ffmpeg:debian-11-slim as ffmpeg
 FROM ghcr.io/moritzheiber/ruby-jemalloc:3.0.6-slim as ruby
 FROM node:${NODE_VERSION} as build
 
@@ -63,7 +64,6 @@ RUN apt-get update && \
         libssl1.1 \
         libpq5 \
         imagemagick \
-        ffmpeg \
         libjemalloc2 \
         libicu67 \
         libidn11 \
@@ -78,6 +78,7 @@ RUN apt-get update && \
 # Note: no, cleaning here since Debian does this automatically
 # See the file /etc/apt/apt.conf.d/docker-clean within the Docker image's filesystem
 
+COPY --from=ffmpeg /usr/local /usr/local/
 COPY --chown=mastodon:mastodon . /opt/mastodon
 COPY --chown=mastodon:mastodon --from=build /opt/mastodon /opt/mastodon
 
