@@ -78,6 +78,19 @@ RUN apt-get update && \
 # Note: no, cleaning here since Debian does this automatically
 # See the file /etc/apt/apt.conf.d/docker-clean within the Docker image's filesystem
 
+RUN apt-get install -y \
+        ca-certificates wget \
+        nasm \
+        libass-dev \
+        libfreetype6-dev \
+        libmp3lame-dev \
+        libx264-dev \
+        libx265-dev \
+        libnuma-dev \
+        libvpx-dev \
+        libopus-dev \
+        libdav1d-dev \
+        libvorbis-dev
 COPY --from=ffmpeg /usr/local /usr/local/
 COPY --chown=mastodon:mastodon . /opt/mastodon
 COPY --chown=mastodon:mastodon --from=build /opt/mastodon /opt/mastodon
