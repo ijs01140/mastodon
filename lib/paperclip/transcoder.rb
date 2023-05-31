@@ -40,7 +40,6 @@ module Paperclip
         @output_options['f']       = 'image2'
         @output_options['vframes'] = 1
       when 'mp4'
-        @output_options['acodec'] = 'aac'
         @output_options['strict'] = 'experimental'
 
         if high_vfr?(metadata) && !eligible_to_passthrough?(metadata)
