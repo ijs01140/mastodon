@@ -34,13 +34,12 @@ module Paperclip
       @input_options  = @convert_options[:input]&.dup  || {}
 
       case @format.to_s
-      when /jpg$/, /jpeg$/, /png$/, /gif$/
+      when /jpg$/, /jpeg$/, /png$/, /gif$/, /avif$/
         @input_options['ss'] = @time
 
         @output_options['f']       = 'image2'
         @output_options['vframes'] = 1
       when 'mp4'
-        @output_options['acodec'] = 'aac'
         @output_options['strict'] = 'experimental'
 
         if high_vfr?(metadata) && !eligible_to_passthrough?(metadata)

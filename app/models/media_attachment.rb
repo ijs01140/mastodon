@@ -101,12 +101,11 @@ class MediaAttachment < ApplicationRecord
         'pix_fmt' => 'yuv420p',
         'vf' => 'scale=\'trunc(iw/2)*2:trunc(ih/2)*2\'',
         'vsync' => 'cfr',
-        'c:v' => 'h264',
-        'maxrate' => '1300K',
-        'bufsize' => '1300K',
-        'b:v' => '1300K',
+        'c:v' => 'libsvtav1',
+        'c:a' => 'libopus',
         'frames:v' => 60 * 60 * 3,
-        'crf' => 18,
+        'crf' => 35,
+        'preset' => 10,
         'map_metadata' => '-1',
       }.freeze,
     }.freeze,
@@ -143,7 +142,7 @@ class MediaAttachment < ApplicationRecord
       blurhash: BLURHASH_OPTIONS,
     }.freeze,
 
-    original: VIDEO_FORMAT.merge(passthrough_options: VIDEO_PASSTHROUGH_OPTIONS).freeze,
+    original: VIDEO_FORMAT.freeze,
   }.freeze
 
   AUDIO_STYLES = {
