@@ -92,6 +92,17 @@ RUN apt-get install -y \
         libdav1d-dev \
         libvorbis-dev
 COPY --from=ffmpeg /usr/local /usr/local/
+RUN apt-get install -y --no-install-recommends libomp-dev ca-certificates \
+    # libaom
+    \
+    # libheif
+    libde265-0 libjpeg62-turbo x265 libtool \
+    # libwebp
+    \
+    # libjxl
+    \
+    # IM
+    libpng16-16 libjpeg62-turbo libgomp1 ghostscript libxml2-utils fonts-dejavu liblcms2-2
 COPY --from=imagemagick /usr/local /usr/local/
 COPY --chown=mastodon:mastodon . /opt/mastodon
 COPY --chown=mastodon:mastodon --from=build /opt/mastodon /opt/mastodon
