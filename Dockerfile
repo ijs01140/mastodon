@@ -3,6 +3,7 @@
 ARG NODE_VERSION="16.18.1-bullseye-slim"
 
 FROM ijs01140/ffmpeg:debian-11-slim as ffmpeg
+FROM dpokidov/imagemagick:latest-bullseye as imagemagick
 FROM ghcr.io/moritzheiber/ruby-jemalloc:3.0.6-slim as ruby
 FROM node:${NODE_VERSION} as build
 
@@ -63,7 +64,6 @@ RUN apt-get update && \
         procps \
         libssl1.1 \
         libpq5 \
-        imagemagick \
         libjemalloc2 \
         libicu67 \
         libidn11 \
@@ -92,6 +92,7 @@ RUN apt-get install -y \
         libdav1d-dev \
         libvorbis-dev
 COPY --from=ffmpeg /usr/local /usr/local/
+COPY --from=imagemagick /usr/local /usr/local/
 COPY --chown=mastodon:mastodon . /opt/mastodon
 COPY --chown=mastodon:mastodon --from=build /opt/mastodon /opt/mastodon
 
