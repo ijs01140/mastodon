@@ -102,7 +102,9 @@ RUN apt-get install -y --no-install-recommends libomp-dev ca-certificates \
     # libjxl
     \
     # IM
-    libpng16-16 libjpeg62-turbo libgomp1 ghostscript libxml2-utils fonts-dejavu liblcms2-2
+    libpng16-16 libjpeg62-turbo libgomp1 ghostscript libxml2-utils fonts-dejavu liblcms2-2 \
+    # Install manually to prevent deleting with -dev packages
+    libxext6 libbrotli1
 COPY --from=imagemagick /usr/local /usr/local/
 COPY --chown=mastodon:mastodon . /opt/mastodon
 COPY --chown=mastodon:mastodon --from=build /opt/mastodon /opt/mastodon
