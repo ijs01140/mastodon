@@ -123,8 +123,8 @@ RUN apt-get install -y --no-install-recommends libomp-dev ca-certificates \
     # Install manually to prevent deleting with -dev packages
     libxext6 libbrotli1
 COPY --from=imagemagick /usr/local /usr/local/
-RUN ldconfig /usr/local/lib
 COPY --from=build /usr/local /usr/local/
+RUN ldconfig /usr/local/lib
 COPY --chown=mastodon:mastodon . /opt/mastodon
 COPY --chown=mastodon:mastodon --from=build /opt/mastodon /opt/mastodon
 
