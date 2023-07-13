@@ -41,6 +41,23 @@ RUN apt-get update && \
     bundle install -j"$(nproc)" && \
     yarn install --pure-lockfile --network-timeout 600000
 
+# build latest file command
+WORKDIR /tmp/build-file
+RUN apt-get install -y \
+	automake \
+	gcc \
+	libtool \
+	make \
+	python \
+	zlib1g-dev && \
+    git clone https://github.com/file/file.git && \
+    cd file && \
+	autoreconf -f -i && \
+	./configure --disable-silent-rules && \
+	make -j$(nproc) && \
+	make -C tests check && \
+    make install
+
 FROM node:${NODE_VERSION}
 
 ARG UID="991"
@@ -107,6 +124,7 @@ RUN apt-get install -y --no-install-recommends libomp-dev ca-certificates \
     libxext6 libbrotli1
 COPY --from=imagemagick /usr/local /usr/local/
 RUN ldconfig /usr/local/lib
+COPY --from=build /usr/local/bin /usr/local/bin/
 COPY --chown=mastodon:mastodon . /opt/mastodon
 COPY --chown=mastodon:mastodon --from=build /opt/mastodon /opt/mastodon
 
