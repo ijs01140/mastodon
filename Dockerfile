@@ -124,7 +124,7 @@ RUN apt-get install -y --no-install-recommends libomp-dev ca-certificates \
     libxext6 libbrotli1
 COPY --from=imagemagick /usr/local /usr/local/
 RUN ldconfig /usr/local/lib
-COPY --from=build /usr/local/bin /usr/local/bin/
+COPY --from=build /usr/local /usr/local/
 COPY --chown=mastodon:mastodon . /opt/mastodon
 COPY --chown=mastodon:mastodon --from=build /opt/mastodon /opt/mastodon
 
