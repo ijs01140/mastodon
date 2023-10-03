@@ -2,6 +2,7 @@
 # This needs to be bookworm-slim because the Ruby image is built on bookworm-slim
 ARG NODE_VERSION="20.6-bookworm-slim"
 
+FROM ijs01140/ffmpeg:debian-12-slim as ffmpeg
 FROM ghcr.io/moritzheiber/ruby-jemalloc:3.2.2-slim as ruby
 FROM node:${NODE_VERSION} as build
 
@@ -68,7 +69,6 @@ RUN apt-get update && \
         libssl3 \
         libpq5 \
         imagemagick \
-        ffmpeg \
         libjemalloc2 \
         libicu72 \
         libidn12 \
@@ -83,6 +83,7 @@ RUN apt-get update && \
 # Note: no, cleaning here since Debian does this automatically
 # See the file /etc/apt/apt.conf.d/docker-clean within the Docker image's filesystem
 
+COPY --from=ffmpeg /usr/local /usr/local/
 COPY --chown=mastodon:mastodon . /opt/mastodon
 COPY --chown=mastodon:mastodon --from=build /opt/mastodon /opt/mastodon
 
