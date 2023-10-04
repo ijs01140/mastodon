@@ -84,7 +84,6 @@ RUN apt-get update && \
 # See the file /etc/apt/apt.conf.d/docker-clean within the Docker image's filesystem
 
 COPY --from=ffmpeg /usr/local /usr/local/
-RUN hash -r
 COPY --chown=mastodon:mastodon . /opt/mastodon
 COPY --chown=mastodon:mastodon --from=build /opt/mastodon /opt/mastodon
 
