@@ -105,7 +105,7 @@ class MediaAttachment < ApplicationRecord
         'c:v' => 'libsvtav1',
         'crf' => 35,
         'preset' => 10,
-        'c:a' => 'aac',
+        'c:a' => 'libopus',
         'b:a' => '192k',
         'map_metadata' => '-1',
         'frames:v' => MAX_VIDEO_FRAMES,
