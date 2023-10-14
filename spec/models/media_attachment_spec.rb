@@ -175,7 +175,7 @@ RSpec.describe MediaAttachment, :attachment_processing do
       expect(media)
         .to have_attributes(
           type: eq('gifv'),
-          file_content_type: eq('video/mp4')
+          file_content_type: eq('video/webm')
         )
       expect(media_metadata)
         .to include(

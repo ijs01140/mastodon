@@ -93,8 +93,8 @@ class MediaAttachment < ApplicationRecord
   }.freeze
 
   VIDEO_FORMAT = {
-    format: 'mp4',
-    content_type: 'video/mp4',
+    format: 'webm',
+    content_type: 'video/webm',
     vfr_frame_rate_threshold: MAX_VIDEO_FRAME_RATE,
     convert_options: {
       output: {
