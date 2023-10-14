@@ -168,7 +168,7 @@ RSpec.describe MediaAttachment, paperclip_processing: true do
 
     it 'sets correct file metadata' do
       expect(media.type).to eq 'gifv'
-      expect(media.file_content_type).to eq 'video/mp4'
+      expect(media.file_content_type).to eq 'video/webm'
       expect(media.file.meta['original']['width']).to eq 128
       expect(media.file.meta['original']['height']).to eq 128
     end
