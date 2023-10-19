@@ -204,3 +204,5 @@ gem 'net-http', '~> 0.3.2'
 gem 'rubyzip', '~> 2.3'
 
 gem 'hcaptcha', '~> 7.1'
+
+gem 'marcel', github: 'ijs01140/marcel', ref: '92c1f291b454492bb0541f17accfa6989d14289b'

@@ -8,6 +8,13 @@ GIT
       jwt (~> 2.0)
 
 GIT
+  remote: https://github.com/ijs01140/marcel.git
+  revision: 92c1f291b454492bb0541f17accfa6989d14289b
+  ref: 92c1f291b454492bb0541f17accfa6989d14289b
+  specs:
+    marcel (1.0.2)
+
+GIT
   remote: https://github.com/jhawthorn/nsa.git
   revision: e020fcc3a54d993ab45b7194d89ab720296c111b
   ref: e020fcc3a54d993ab45b7194d89ab720296c111b
@@ -442,7 +449,6 @@ GEM
       net-imap
       net-pop
       net-smtp
-    marcel (1.0.2)
     mario-redis-lock (1.2.1)
       redis (>= 3.0.5)
     matrix (0.4.2)
@@ -875,6 +881,7 @@ DEPENDENCIES
   letter_opener_web (~> 2.0)
   link_header (~> 0.0)
   lograge (~> 0.12)
+  marcel!
   mario-redis-lock (~> 1.2)
   md-paperclip-azure (~> 2.2)
   memory_profiler
