@@ -3,7 +3,7 @@
 module Account::Header
   extend ActiveSupport::Concern
 
-  IMAGE_MIME_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'].freeze
+  IMAGE_MIME_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/avif'].freeze
   LIMIT = 2.megabytes
 
   HEADER_DIMENSIONS = [1500, 500].freeze
