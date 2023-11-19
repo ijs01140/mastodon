@@ -103,8 +103,8 @@ class MediaAttachment < ApplicationRecord
         'pix_fmt' => 'yuv420p', # Ensure color space for cross-browser compatibility
         'vf' => 'crop=floor(iw/2)*2:floor(ih/2)*2', # h264 requires width and height to be even. Crop instead of scale to avoid blurring
         'c:v' => 'libsvtav1',
-        'crf' => 35,
-        'preset' => 10,
+        'crf' => 38,
+        'preset' => 8,
         'c:a' => 'libopus',
         'b:a' => '192k',
         'map_metadata' => '-1',
