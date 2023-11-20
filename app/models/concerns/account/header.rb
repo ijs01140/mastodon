@@ -13,7 +13,7 @@ module Account::Header
   class_methods do
     def header_styles(file)
       styles = { original: { pixels: MAX_PIXELS, file_geometry_parser: FastGeometryParser } }
-      styles[:static] = { format: 'png', convert_options: '-coalesce', file_geometry_parser: FastGeometryParser } if file.content_type == 'image/gif'
+      styles[:static] = { format: 'avif', convert_options: '-coalesce', file_geometry_parser: FastGeometryParser } if file.content_type == 'image/gif'
       styles
     end
 
