@@ -4,7 +4,7 @@ ARG NODE_VERSION="20.6-bookworm-slim"
 
 FROM ijs01140/ffmpeg:debian-12-slim as ffmpeg
 FROM ijs01140/imagemagick-docker:latest-bookworm as imagemagick
-FROM ghcr.io/moritzheiber/ruby-jemalloc:3.2.2-slim as ruby
+FROM ghcr.io/moritzheiber/ruby-jemalloc:3.2.3-slim as ruby
 FROM node:${NODE_VERSION} as build
 
 COPY --link --from=ruby /opt/ruby /opt/ruby
