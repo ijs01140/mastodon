@@ -205,4 +205,4 @@ gem 'rubyzip', '~> 2.3'
 
 gem 'hcaptcha', '~> 7.1'
 
-gem 'marcel', github: 'ijs01140/marcel', ref: '92c1f291b454492bb0541f17accfa6989d14289b'
+gem 'marcel', github: 'ijs01140/marcel', ref: '4a90b3b593c22f851437a62a19ccb8919e45f7fc'

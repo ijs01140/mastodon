@@ -9,10 +9,10 @@ GIT
 
 GIT
   remote: https://github.com/ijs01140/marcel.git
-  revision: 92c1f291b454492bb0541f17accfa6989d14289b
-  ref: 92c1f291b454492bb0541f17accfa6989d14289b
+  revision: 4a90b3b593c22f851437a62a19ccb8919e45f7fc
+  ref: 4a90b3b593c22f851437a62a19ccb8919e45f7fc
   specs:
-    marcel (1.0.2)
+    marcel (1.0.3)
 
 GIT
   remote: https://github.com/mastodon/rails-settings-cached.git
