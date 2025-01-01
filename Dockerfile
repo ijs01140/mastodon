@@ -212,6 +212,26 @@ RUN \
 # Create temporary ffmpeg specific build layer from build layer
 FROM build AS ffmpeg
 
+# SVT-AV1 version to compile, change with [--build-arg SVTAV1_VERSION="2.x.x"]
+ARG SVTAV1_VERSION=2.3.0
+ARG SVTAV1_URL=https://gitlab.com/AOMediaCodec/SVT-AV1/-/archive/v${SVTAV1_VERSION}/SVT-AV1-v${SVTAV1_VERSION}.tar.bz2
+
+WORKDIR /usr/local/svt-av1/src
+# Download and extract SVT-AV1 source code
+ADD ${SVTAV1_URL} /usr/local/svt-av1/src/
+RUN tar xf SVT-AV1-v${SVTAV1_VERSION}.tar.bz2;
+
+WORKDIR /usr/local/svt-av1/src/SVT-AV1-v${SVTAV1_VERSION}
+
+# Configure and compile SVT-AV1
+RUN \
+  cmake -G "Unix Makefiles" \
+    -DCMAKE_INSTALL_PREFIX=/usr/local/ffmpeg \
+    -DCMAKE_BUILD_TYPE=Release \
+  ; \
+  make -j$(nproc); \
+  make install;
+
 # ffmpeg version to compile, change with [--build-arg FFMPEG_VERSION="7.0.x"]
 # renovate: datasource=repology depName=ffmpeg packageName=openpkg_current/ffmpeg
 ARG FFMPEG_VERSION=7.0.2
@@ -248,6 +268,7 @@ RUN \
     --enable-libwebp \
     --enable-libx264 \
     --enable-libx265 \
+    --enable-libsvtav1 \
     --enable-shared \
     --enable-version3 \
   ; \
@@ -380,7 +401,7 @@ COPY --from=bundler /usr/local/bundle/ /usr/local/bundle/
 # Copy libvips components to layer
 COPY --from=libvips /usr/local/libvips/bin /usr/local/bin
 COPY --from=libvips /usr/local/libvips/lib /usr/local/lib
-# Copy ffpmeg components to layer
+# Copy ffpmeg components to layer(with svtav1 included)
 COPY --from=ffmpeg /usr/local/ffmpeg/bin /usr/local/bin
 COPY --from=ffmpeg /usr/local/ffmpeg/lib /usr/local/lib
 
