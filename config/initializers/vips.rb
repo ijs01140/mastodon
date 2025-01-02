@@ -23,6 +23,7 @@ if Rails.configuration.x.use_vips
     VipsForeignSaveSpng
     VipsForeignSaveJpeg
     VipsForeignSaveWebp
+    VipsForeignSaveHeif
   ).each do |operation|
     Vips.block(operation, false)
   end
