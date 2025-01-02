@@ -9,13 +9,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    matrix:
-      image-name: ['mastodon', 'mastodon-streaming']
-      include:
-        - image-name: 'mastodon'
-          image-path: 'Dockerfile'
-        - image-name: 'mastodon-streaming'
-          image-path: 'streaming/Dockerfile'
+    strategy:
+      fail-fast: false
+      matrix:
+        image-name: ['mastodon', 'mastodon-streaming']
+        include:
+          - image-name: 'mastodon'
+            image-path: 'Dockerfile'
+          - image-name: 'mastodon-streaming'
+            image-path: 'streaming/Dockerfile'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -36,11 +38,11 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/mastodon
-
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.image-name }}
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
+          file_to_build: ${{ matrix.image-path }}
           platforms: linux/amd64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
