@@ -2,13 +2,20 @@ name: Publish Docker image
 on:
   workflow_dispatch:
   push:
-    branches: [ 'main', 'stable-*', 'dev-*' ]
+    branches: ['main', 'stable-*', 'dev-*']
     tags:
       - '*'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    matrix:
+      image-name: ['mastodon', 'mastodon-streaming']
+      include:
+        - image-name: 'mastodon'
+          image-path: 'Dockerfile'
+        - image-name: 'mastodon-streaming'
+          image-path: 'streaming/Dockerfile'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
