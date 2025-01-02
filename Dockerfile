@@ -168,6 +168,8 @@ RUN \
     libspng-dev \
     libtiff-dev \
     libwebp-dev \
+  # svt-av1
+    xutils-dev \
   # ffmpeg components
     libdav1d-dev \
     liblzma-dev \
@@ -230,7 +232,8 @@ RUN \
     -DCMAKE_BUILD_TYPE=Release \
   ; \
   make -j$(nproc); \
-  make install;
+  make install; \
+  lndir /usr/local/ffmpeg/lib /usr/local/lib
 
 # ffmpeg version to compile, change with [--build-arg FFMPEG_VERSION="7.0.x"]
 # renovate: datasource=repology depName=ffmpeg packageName=openpkg_current/ffmpeg
