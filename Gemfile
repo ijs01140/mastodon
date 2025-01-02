@@ -226,3 +226,6 @@ gem 'rubyzip', '~> 2.3'
 gem 'hcaptcha', '~> 7.1'
 
 gem 'mail', '~> 2.8'
+
+# fix detection of AV1 in webm
+gem 'marcel', github: 'ijs01140/marcel', ref: 'c29e65062f7be5c681aca7c7c1da99f0e30f490c'
