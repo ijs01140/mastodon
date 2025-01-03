@@ -58,10 +58,10 @@ class MediaAttachment < ApplicationRecord
   ).freeze
 
   IMAGE_MIME_TYPES             = %w(image/jpeg image/png image/gif image/heic image/heif image/webp image/avif).freeze
-  IMAGE_CONVERTIBLE_MIME_TYPES = %w(image/heic image/heif image/avif).freeze
+  IMAGE_CONVERTIBLE_MIME_TYPES = %w(image/jpeg image/png image/heic image/heif image/webp).freeze
   VIDEO_MIME_TYPES             = %w(video/webm video/mp4 video/quicktime video/ogg).freeze
-  VIDEO_CONVERTIBLE_MIME_TYPES = %w(video/webm video/quicktime).freeze
-  AUDIO_MIME_TYPES             = %w(audio/wave audio/wav audio/x-wav audio/x-pn-wave audio/vnd.wave audio/ogg audio/vorbis audio/mpeg audio/mp3 audio/webm audio/flac audio/aac audio/m4a audio/x-m4a audio/mp4 audio/3gpp video/x-ms-asf).freeze
+  VIDEO_CONVERTIBLE_MIME_TYPES = %w(video/webm video/mp4 video/quicktime video/ogg).freeze
+  AUDIO_MIME_TYPES             = %w(audio/wave audio/wav audio/x-wav audio/x-pn-wave audio/vnd.wave audio/ogg audio/vorbis audio/opus audio/mpeg audio/mp3 audio/webm audio/flac audio/aac audio/m4a audio/x-m4a audio/mp4 audio/3gpp video/x-ms-asf).freeze
 
   BLURHASH_OPTIONS = {
     x_comp: 4,
@@ -83,28 +83,29 @@ class MediaAttachment < ApplicationRecord
 
   IMAGE_CONVERTED_STYLES = {
     original: {
-      format: 'jpeg',
-      content_type: 'image/jpeg',
+      format: 'avif',
+      content_type: 'image/avif',
     }.merge(IMAGE_STYLES[:original]).freeze,
 
     small: {
-      format: 'jpeg',
+      format: 'avif',
     }.merge(IMAGE_STYLES[:small]).freeze,
   }.freeze
 
   VIDEO_FORMAT = {
-    format: 'mp4',
-    content_type: 'video/mp4',
+    format: 'webm',
+    content_type: 'video/webm',
     vfr_frame_rate_threshold: MAX_VIDEO_FRAME_RATE,
     convert_options: {
       output: {
         'loglevel' => 'fatal',
-        'preset' => 'veryfast',
         'movflags' => 'faststart', # Move metadata to start of file so playback can begin before download finishes
         'pix_fmt' => 'yuv420p', # Ensure color space for cross-browser compatibility
         'vf' => 'crop=floor(iw/2)*2:floor(ih/2)*2', # h264 requires width and height to be even. Crop instead of scale to avoid blurring
-        'c:v' => 'h264',
-        'c:a' => 'aac',
+        'c:v' => 'libsvtav1',
+        'crf' => 38,
+        'preset' => 8,
+        'c:a' => 'libopus',
         'b:a' => '192k',
         'map_metadata' => '-1',
         'frames:v' => MAX_VIDEO_FRAMES,
@@ -113,11 +114,11 @@ class MediaAttachment < ApplicationRecord
   }.freeze
 
   VIDEO_PASSTHROUGH_OPTIONS = {
-    video_codecs: ['h264'].freeze,
-    audio_codecs: ['aac', nil].freeze,
+    video_codecs: ['av1'].freeze,
+    audio_codecs: ['opus', nil].freeze,
     colorspaces: ['yuv420p'].freeze,
     options: {
-      format: 'mp4',
+      format: 'webm',
       convert_options: {
         output: {
           'loglevel' => 'fatal',
@@ -148,12 +149,11 @@ class MediaAttachment < ApplicationRecord
 
   AUDIO_STYLES = {
     original: {
-      format: 'mp3',
-      content_type: 'audio/mpeg',
+      format: 'opus',
+      content_type: 'audio/opus',
       convert_options: {
         output: {
           'loglevel' => 'fatal',
-          'q:a' => 2,
         }.freeze,
       }.freeze,
     }.freeze,

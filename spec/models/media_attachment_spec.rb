@@ -128,44 +128,44 @@ RSpec.describe MediaAttachment, :attachment_processing do
   describe 'jpeg' do
     let(:media) { Fabricate(:media_attachment, file: attachment_fixture('600x400.jpeg')) }
 
-    it_behaves_like 'static 600x400 image', 'image/jpeg', '.jpeg'
+    it_behaves_like 'static 600x400 image', 'image/avif', '.avif'
   end
 
   describe 'png' do
     let(:media) { Fabricate(:media_attachment, file: attachment_fixture('600x400.png')) }
 
-    it_behaves_like 'static 600x400 image', 'image/png', '.png'
+    it_behaves_like 'static 600x400 image', 'image/avif', '.avif'
   end
 
   describe 'monochrome jpg' do
     let(:media) { Fabricate(:media_attachment, file: attachment_fixture('monochrome.png')) }
 
-    it_behaves_like 'static 600x400 image', 'image/png', '.png'
+    it_behaves_like 'static 600x400 image', 'image/avif', '.avif'
   end
 
   describe 'webp' do
     let(:media) { Fabricate(:media_attachment, file: attachment_fixture('600x400.webp')) }
 
-    it_behaves_like 'static 600x400 image', 'image/webp', '.webp'
+    it_behaves_like 'static 600x400 image', 'image/avif', '.avif'
   end
 
   describe 'avif' do
     let(:media) { Fabricate(:media_attachment, file: attachment_fixture('600x400.avif')) }
 
-    it_behaves_like 'static 600x400 image', 'image/jpeg', '.jpeg'
+    it_behaves_like 'static 600x400 image', 'image/avif', '.avif'
   end
 
   describe 'heic' do
     let(:media) { Fabricate(:media_attachment, file: attachment_fixture('600x400.heic')) }
 
-    it_behaves_like 'static 600x400 image', 'image/jpeg', '.jpeg'
+    it_behaves_like 'static 600x400 image', 'image/avif', '.avif'
   end
 
   describe 'base64-encoded image' do
     let(:base64_attachment) { "data:image/jpeg;base64,#{Base64.encode64(attachment_fixture('600x400.jpeg').read)}" }
     let(:media) { Fabricate(:media_attachment, file: base64_attachment) }
 
-    it_behaves_like 'static 600x400 image', 'image/jpeg', '.jpeg'
+    it_behaves_like 'static 600x400 image', 'image/avif', '.avif'
   end
 
   describe 'animated gif' do
@@ -175,7 +175,7 @@ RSpec.describe MediaAttachment, :attachment_processing do
       expect(media)
         .to have_attributes(
           type: eq('gifv'),
-          file_content_type: eq('video/mp4')
+          file_content_type: eq('video/webm')
         )
       expect(media_metadata)
         .to include(

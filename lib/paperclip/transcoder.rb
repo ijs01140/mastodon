@@ -34,12 +34,12 @@ module Paperclip
       @input_options  = @convert_options[:input]&.dup  || {}
 
       case @format.to_s
-      when /jpg$/, /jpeg$/, /png$/, /gif$/
+      when /jpg$/, /jpeg$/, /png$/, /gif$/, /avif$/
         @input_options['ss'] = @time
 
         @output_options['f']       = 'image2'
         @output_options['vframes'] = 1
-      when 'mp4'
+      when 'webm'
         unless eligible_to_passthrough?(metadata)
           size_limit_in_bits = MediaAttachment::VIDEO_LIMIT * 8
           desired_bitrate = (metadata.width * metadata.height * 30 * BITS_PER_PIXEL).floor
@@ -47,7 +47,7 @@ module Paperclip
           maximum_bitrate = (size_limit_in_bits / duration).floor - 192_000 # Leave some space for the audio stream
           bitrate = [desired_bitrate, maximum_bitrate].min
 
-          @output_options['b:v']     = bitrate
+          # @output_options['b:v']     = bitrate
           @output_options['maxrate'] = bitrate + 192_000
           @output_options['bufsize'] = bitrate * 5
 

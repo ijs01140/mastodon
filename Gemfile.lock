@@ -7,6 +7,13 @@ GIT
       hkdf (~> 0.2)
       jwt (~> 2.0)
 
+GIT
+  remote: https://github.com/ijs01140/marcel.git
+  revision: c29e65062f7be5c681aca7c7c1da99f0e30f490c
+  ref: c29e65062f7be5c681aca7c7c1da99f0e30f490c
+  specs:
+    marcel (1.0.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -420,7 +427,6 @@ GEM
       net-imap
       net-pop
       net-smtp
-    marcel (1.0.4)
     mario-redis-lock (1.2.1)
       redis (>= 3.0.5)
     matrix (0.4.2)
@@ -967,6 +973,7 @@ DEPENDENCIES
   link_header (~> 0.0)
   lograge (~> 0.12)
   mail (~> 2.8)
+  marcel!
   mario-redis-lock (~> 1.2)
   md-paperclip-azure (~> 2.2)
   memory_profiler
