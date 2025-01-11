@@ -42,6 +42,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
+          file: ${{ matrix.image-context }}/Dockerfile
           context: ${{ matrix.image-image-context }}
           platforms: linux/amd64
           push: true
