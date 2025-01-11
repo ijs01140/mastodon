@@ -15,9 +15,9 @@ jobs:
         image-name: ['mastodon', 'mastodon-streaming']
         include:
           - image-name: 'mastodon'
-            image-path: 'Dockerfile'
+            image-context: '.'
           - image-name: 'mastodon-streaming'
-            image-path: 'streaming/Dockerfile'
+            image-context: 'streaming/'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -42,7 +42,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          file_to_build: ${{ matrix.image-path }}
+          file: ${{ matrix.image-context }}/Dockerfile
+          context: ${{ matrix.image-image-context }}
           platforms: linux/amd64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
