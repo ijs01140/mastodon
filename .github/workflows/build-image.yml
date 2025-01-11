@@ -16,8 +16,10 @@ jobs:
         include:
           - image-name: 'mastodon'
             image-context: '.'
+            cache: True
           - image-name: 'mastodon-streaming'
             image-context: 'streaming/'
+            cache: False
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -48,5 +50,5 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: ${{ matrix.cache && 'type=gha' || '' }}
+          cache-to: ${{ matrix.cache && 'type=gha,mode=max' || '' }}
