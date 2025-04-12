@@ -50,7 +50,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           file: ${{ matrix.image-context }}/Dockerfile
-          context: ${{ matrix.image-image-context }}
+          context: ${{ matrix.image-context }}
           platforms: ${{ matrix.platform }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
