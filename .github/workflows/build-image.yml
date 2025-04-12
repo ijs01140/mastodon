@@ -15,10 +15,10 @@ jobs:
         platform: ['linux/amd64', 'linux/arm64']
         include:
           - image-name: 'mastodon'
-            image-context: '.'
+            image-path: './Dockerfile'
             cache: True
           - image-name: 'mastodon-streaming'
-            image-context: 'streaming/'
+            image-path: 'streaming/Dockerfile'
             cache: False
           - platform: linux/amd64
             os-with-arch: ubuntu-24.04
@@ -49,8 +49,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          file: ${{ matrix.image-context }}/Dockerfile
-          context: ${{ matrix.image-context }}
+          file: ${{ matrix.image-path }}
+          context: .
           platforms: ${{ matrix.platform }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
